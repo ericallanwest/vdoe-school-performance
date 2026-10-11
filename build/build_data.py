@@ -6,7 +6,7 @@ Inputs
   Census TIGER 2024 tracts + ACS 2024 5-year tables B19013 (median household income) and
   B11001 (households), downloaded to cache/
 
-Outputs (paths relative to school-performance-map/, the static site)
+Outputs (paths relative to the repo root, which is the static site)
   data/schools.geojson      one point per school with category, NCES attributes, tract income
   data/tracts.geojson       simplified tracts for the study area with median household income
   data/zones.geojson        approximate attendance zones (per-grade Voronoi within each division)

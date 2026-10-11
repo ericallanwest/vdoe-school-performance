@@ -16,7 +16,9 @@ Too Small 3 · not rated 1
   band, a rank correlation for whatever is currently filtered, and a table view. Switch between three income
   measures (below). Clicking a dot flies the map to that school.
 
-Run locally: `python3 -m http.server -d school-performance-map` and open <http://localhost:8000>.
+Live map: <https://ericallanwest.github.io/vdoe-school-performance/>
+
+Run locally: `python3 -m http.server` from the repo root and open <http://localhost:8000>.
 It is a static site (Leaflet from cdnjs, Esri gray-canvas basemap), so GitHub Pages can serve it as-is.
 
 ## Data & method
