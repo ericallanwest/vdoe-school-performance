@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SW Virginia School Performance</title>
-<meta name="description" content="Map of 2025 Virginia school performance categories (Regions 6 & 7) with neighborhood median household income.">
+<title>Virginia School Performance</title>
+<meta name="description" content="Map of Virginia School Performance &amp; Support Framework results (2025-26, released fall 2026) for every public school, with neighborhood median household income.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 :root {
@@ -90,14 +90,15 @@ select, input[type=search] {
 .seg button[aria-pressed=true] { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--ink); font-weight: 600; }
 .finding { font-size: 13px; color: var(--ink-2); margin: 2px 0 6px; max-width: 980px; }
 .finding b { color: var(--ink); }
-#strip { width: 100%; display: block; }
-#strip text { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
-#strip .cat-label { font-size: 12px; fill: var(--ink-2); }
-#strip .gridline { stroke: var(--grid); }
-#strip .median { stroke: var(--ink); stroke-width: 2; }
-#strip .iqr { fill: color-mix(in srgb, var(--ink) 7%, transparent); }
-#strip circle { stroke: var(--surface); stroke-width: 1; cursor: pointer; }
-#strip circle.hl { stroke: var(--ink); stroke-width: 2; }
+#chart { width: 100%; display: block; }
+#chart text { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#chart .cat-label { font-size: 12px; fill: var(--ink-2); }
+#chart .gridline { stroke: var(--grid); }
+#chart .cut { stroke: var(--axis); stroke-dasharray: 5 4; }
+#chart .median { stroke: var(--ink); stroke-width: 2; }
+#chart .iqr { fill: color-mix(in srgb, var(--ink) 7%, transparent); }
+#chart circle { stroke: var(--surface); stroke-width: 0.75; cursor: pointer; }
+#chart circle.hl { stroke: var(--ink); stroke-width: 2; }
 table { border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
 th, td { text-align: right; padding: 3px 10px; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; }
 th:first-child, td:first-child { text-align: left; }
@@ -118,6 +119,8 @@ details summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; margi
 .pop dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; font-size: 12.5px; }
 .pop dt { color: var(--ink-2); }
 .pop dd { margin: 0; font-variant-numeric: tabular-nums; }
+.pop .sep { border-top: 1px solid var(--grid); padding-top: 4px; margin-top: 4px; }
+.pop abbr { text-decoration: underline dotted; cursor: help; }
 
 @media (max-width: 800px) {
   body { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; }
@@ -130,8 +133,8 @@ details summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; margi
 </head>
 <body>
 <aside>
-  <h1>School Performance in Southwest &amp; Southside Virginia</h1>
-  <p class="sub">VDOE School Performance &amp; Support Framework categories for <span id="n-total">—</span> schools, with neighborhood median household income.</p>
+  <h1>Virginia School Performance</h1>
+  <p class="sub">VDOE School Performance &amp; Support Framework results (2025-26, released fall 2026) for <span id="n-total">—</span> public schools, with neighborhood median household income.</p>
 
   <h2>Performance category</h2>
   <fieldset id="cats"></fieldset>
@@ -143,8 +146,9 @@ details summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; margi
   <h2>School level</h2>
   <div class="chips" id="levels"></div>
 
-  <h2>Division</h2>
-  <select id="division"><option value="">All divisions</option></select>
+  <h2>Area</h2>
+  <select id="region" aria-label="Superintendent's region"></select>
+  <select id="division" aria-label="Division" style="margin-top:6px"></select>
 
   <h2>Find a school</h2>
   <input type="search" id="search" placeholder="School name…" list="school-names" autocomplete="off">
@@ -161,7 +165,7 @@ details summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; margi
 
   <h2>About the data</h2>
   <p class="note">
-    <b>Performance categories:</b> VDOE School Performance &amp; Support Framework (supplied file, Regions 6 &amp; 7).
+    <b>Performance:</b> <a href="https://www.doe.virginia.gov/teaching-learning-assessment/road-to-readiness-school-performance-and-support-framework-resource-hub/spsf-prior-year-results/fall-2026-statewide-results" target="_blank" rel="noopener">VDOE statewide SPSF results, 2025-26</a> (framework score, category, federal identification).
     <b>Locations:</b> <a href="https://nces.ed.gov/programs/edge/Geographic/SchoolLocations" target="_blank" rel="noopener">NCES EDGE</a> public school file, 2024-25.
     <b>Income:</b> ACS 2024 5-year, table B19013, census tracts.
   </p>
@@ -172,14 +176,15 @@ details summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; margi
 
 <main>
   <div id="map" role="region" aria-label="Map of schools"></div>
-  <section id="panel" aria-label="Income by performance category">
+  <section id="panel" aria-label="Income and school performance">
     <header>
-      <h2>Income by performance category</h2>
+      <h2 id="chart-title">Income by performance category</h2>
+      <div class="seg" id="view" role="group" aria-label="Chart"></div>
       <div class="seg" id="measure" role="group" aria-label="Income measure"></div>
       <span class="note" id="panel-count"></span>
     </header>
     <p class="finding" id="finding"></p>
-    <svg id="strip" role="img" aria-label="Strip chart of income by performance category"></svg>
+    <svg id="chart" role="img" aria-label="Chart of income and school performance"></svg>
     <details>
       <summary>Table view &amp; statistics</summary>
       <div id="table"></div>
