@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SW Virginia School Performance</title>
+<meta name="description" content="Map of 2025 Virginia school performance categories (Regions 6 & 7) with neighborhood median household income.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --accent: #2a78d6;
+  --ring: #ffffff;
+  --cat-1: #184f95;  /* Distinguished */
+  --cat-2: #5598e7;  /* Meets Expectations */
+  --cat-3: #ee7d62;  /* Approaching Expectations */
+  --cat-4: #b52b2a;  /* Needs Intensive Support */
+  --cat-0: #898781;  /* Too Small / Not Rated */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --accent: #3987e5; --ring: #1a1a19;
+    --cat-1: #2a6fc4; --cat-2: #6da7ec; --cat-3: #ee7d62; --cat-4: #c93533;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --accent: #3987e5; --ring: #1a1a19;
+  --cat-1: #2a6fc4; --cat-2: #6da7ec; --cat-3: #ee7d62; --cat-4: #c93533;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--page); color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: grid; grid-template-columns: 340px 1fr; grid-template-rows: 100vh;
+}
+aside {
+  background: var(--surface); border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 16px 16px 24px;
+}
+main { display: grid; grid-template-rows: 1fr auto; min-width: 0; }
+#map { min-height: 300px; background: var(--page); }
+h1 { font-size: 17px; margin: 0 0 2px; line-height: 1.25; }
+h2 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-2); margin: 20px 0 8px; }
+.sub { color: var(--ink-2); font-size: 12.5px; margin: 0; }
+.count { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+fieldset { border: 0; padding: 0; margin: 0; }
+label.row {
+  display: grid; grid-template-columns: auto 14px 1fr auto; align-items: center; gap: 8px;
+  padding: 5px 6px; border-radius: 6px; cursor: pointer;
+}
+label.row:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.swatch { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ring); box-shadow: 0 0 0 1px var(--border); }
+input[type=checkbox] { margin: 0; accent-color: var(--accent); }
+select, input[type=search] {
+  width: 100%; font: inherit; color: var(--ink); background: var(--page);
+  border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; cursor: pointer; user-select: none; }
+.chip:has(input:checked) { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.toggle { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; }
+.legend-ramp { display: flex; height: 10px; border-radius: 3px; overflow: hidden; margin: 6px 0 2px; }
+.legend-ramp span { flex: 1; }
+.legend-ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.btn { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.btn:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.note { font-size: 12px; color: var(--ink-2); }
+.note a { color: var(--accent); }
+
+/* Analysis panel */
+#panel { background: var(--surface); border-top: 1px solid var(--border); padding: 12px 16px 14px; max-height: 46vh; overflow: auto; }
+#panel header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-bottom: 6px; }
+#panel h2 { margin: 0; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.seg button { font: inherit; font-size: 12.5px; border: 0; background: transparent; color: var(--ink-2); padding: 4px 10px; cursor: pointer; }
+.seg button[aria-pressed=true] { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--ink); font-weight: 600; }
+.finding { font-size: 13px; color: var(--ink-2); margin: 2px 0 6px; max-width: 980px; }
+.finding b { color: var(--ink); }
+#strip { width: 100%; display: block; }
+#strip text { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+#strip .cat-label { font-size: 12px; fill: var(--ink-2); }
+#strip .gridline { stroke: var(--grid); }
+#strip .median { stroke: var(--ink); stroke-width: 2; }
+#strip .iqr { fill: color-mix(in srgb, var(--ink) 7%, transparent); }
+#strip circle { stroke: var(--surface); stroke-width: 1; cursor: pointer; }
+#strip circle.hl { stroke: var(--ink); stroke-width: 2; }
+table { border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+th, td { text-align: right; padding: 3px 10px; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--ink-2); font-weight: 600; }
+details summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; margin-top: 6px; }
+
+#tip { position: fixed; pointer-events: none; z-index: 1000; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-size: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.15); display: none; max-width: 260px; }
+
+/* Leaflet theming */
+.leaflet-container { font: inherit; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); }
+.leaflet-popup-content { margin: 12px 14px; min-width: 230px; }
+.leaflet-control-attribution { background: color-mix(in srgb, var(--surface) 80%, transparent) !important; color: var(--ink-2); }
+.leaflet-control-attribution a { color: var(--accent); }
+.pop h3 { margin: 0 0 2px; font-size: 14.5px; }
+.pop .badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; margin: 4px 0 8px; }
+.pop dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; font-size: 12.5px; }
+.pop dt { color: var(--ink-2); }
+.pop dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 800px) {
+  body { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; }
+  aside { border-right: 0; border-top: 1px solid var(--border); max-height: none; order: 2; }
+  main { order: 1; }
+  main { grid-template-rows: 70vh auto; }
+  #panel { max-height: none; }
+}
+</style>
+</head>
+<body>
+<aside>
+  <h1>School Performance in Southwest &amp; Southside Virginia</h1>
+  <p class="sub">VDOE School Performance &amp; Support Framework categories for <span id="n-total">—</span> schools, with neighborhood median household income.</p>
+
+  <h2>Performance category</h2>
+  <fieldset id="cats"></fieldset>
+  <div style="display:flex; gap:6px; margin-top:6px">
+    <button class="btn" id="cats-all" type="button">All</button>
+    <button class="btn" id="cats-none" type="button">None</button>
+  </div>
+
+  <h2>School level</h2>
+  <div class="chips" id="levels"></div>
+
+  <h2>Division</h2>
+  <select id="division"><option value="">All divisions</option></select>
+
+  <h2>Find a school</h2>
+  <input type="search" id="search" placeholder="School name…" list="school-names" autocomplete="off">
+  <datalist id="school-names"></datalist>
+
+  <h2>Income layers</h2>
+  <label class="toggle"><input type="checkbox" id="show-tracts" checked> Median household income by census tract</label>
+  <div id="income-legend">
+    <div class="legend-ramp" id="ramp"></div>
+    <div class="legend-ticks" id="ramp-ticks"></div>
+  </div>
+  <label class="toggle"><input type="checkbox" id="show-zones"> Approximate attendance zones (visible schools)</label>
+  <p class="note">Click a school to outline its approximate zone.</p>
+
+  <h2>About the data</h2>
+  <p class="note">
+    <b>Performance categories:</b> VDOE School Performance &amp; Support Framework (supplied file, Regions 6 &amp; 7).
+    <b>Locations:</b> <a href="https://nces.ed.gov/programs/edge/Geographic/SchoolLocations" target="_blank" rel="noopener">NCES EDGE</a> public school file, 2024-25.
+    <b>Income:</b> ACS 2024 5-year, table B19013, census tracts.
+  </p>
+  <p class="note">
+    <b>Attendance zones are approximations</b>, not official boundaries: each division's territory is split among the schools serving each grade by nearest school (Voronoi), and zone income is the household-weighted average of the tract medians it overlaps. Real zones follow roads, rivers and policy, and magnet/virtual schools draw division-wide.
+  </p>
+</aside>
+
+<main>
+  <div id="map" role="region" aria-label="Map of schools"></div>
+  <section id="panel" aria-label="Income by performance category">
+    <header>
+      <h2>Income by performance category</h2>
+      <div class="seg" id="measure" role="group" aria-label="Income measure"></div>
+      <span class="note" id="panel-count"></span>
+    </header>
+    <p class="finding" id="finding"></p>
+    <svg id="strip" role="img" aria-label="Strip chart of income by performance category"></svg>
+    <details>
+      <summary>Table view &amp; statistics</summary>
+      <div id="table"></div>
+    </details>
+  </section>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
