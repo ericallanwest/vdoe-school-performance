@@ -9,13 +9,22 @@ const CATS = [
   { key: "Not Rated", var: "--cat-0" },
 ];
 const LEVELS = ["Elementary", "Middle", "High", "Combined", "Virtual"];
+// sign: +1 when a higher value means a better-off neighborhood, -1 when it means more poverty.
 const MEASURES = {
-  zone_income: { label: "Zone income", long: "household-weighted median income of the approximate attendance zone", fmt: money },
-  tract_income: { label: "School's tract", long: "median household income of the census tract the school sits in", fmt: money },
-  zone_income_vs_division: { label: "Relative to division", long: "zone income ÷ the division's median zone income (1.0 = typical for that division)", fmt: v => v.toFixed(2) + "×" },
+  zone_income: { label: "Zone income", noun: "income", sign: 1, long: "household-weighted median income of the attendance zone", fmt: money },
+  tract_income: { label: "School's tract", noun: "income", sign: 1, long: "median household income of the census tract the school sits in", fmt: money },
+  zone_income_vs_division: { label: "Relative to division", noun: "relative income", sign: 1, long: "zone income ÷ the division's median zone income (1.0 = typical for that division)", fmt: v => v.toFixed(2) + "×" },
+  econ_disadv: { label: "Econ. disadvantaged", noun: "economic disadvantage", sign: -1, long: "share of the school's 2025-26 reading/math test takers whom VDOE flags as economically disadvantaged", fmt: pct },
 };
-const VIEWS = { strip: "By category", scatter: "Score vs. income" };
+const VIEWS = { strip: "By category", scatter: "Score", change: "Change since 2024-25" };
 const FEDERAL = { CSI: "Comprehensive Support & Improvement", TSI: "Targeted Support & Improvement", ATSI: "Additional Targeted Support & Improvement" };
+const ZONE_SOURCES = {
+  official: p => `published by ${esc(p.zone_source_name)}`,
+  sabs: () => "NCES boundary survey, 2015-16",
+  voronoi: () => "approximate (nearest school)",
+  division: () => "whole division (no zone)",
+};
+const dashed = p => p.zone_source === "voronoi" || p.zone_source === "division";
 const SCORE_CUTS = [65, 80, 90]; // approximate framework-score thresholds between categories
 const INCOME_BREAKS = [50000, 65000, 80000, 100000, 130000];
 const INCOME_LABELS = ["&lt;$50k", "50–65", "65–80", "80–100", "100–130", "$130k+"];
@@ -38,6 +47,8 @@ const isDark = () => matchMedia("(prefers-color-scheme: dark)").matches && docum
   || document.documentElement.dataset.theme === "dark";
 const catColor = cat => css(CATS.find(c => c.key === cat).var);
 const levelOf = p => (LEVELS.includes(p.level) ? p.level : "Elementary");
+function pct(v) { return v == null ? "—" : Math.round(v * 100) + "%"; }
+function signed(v, d = 1) { return v == null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "±") + Math.abs(v).toFixed(d); }
 function money(v) { return v == null ? "—" : v > 250000 ? "$250k+" : "$" + Math.round(v / 1000) + "k"; }
 function moneyFull(v) { return v == null ? "—" : v > 250000 ? "$250,000+" : "$" + v.toLocaleString(); }
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
@@ -104,8 +115,11 @@ function popupHtml(p) {
     <dl>
       ${componentRows(p)}
       ${p.federal_id ? `<dt>Federal ID</dt><dd><abbr title="${esc(FEDERAL[p.federal_id] || p.federal_id)}">${esc(p.federal_id)}</abbr></dd>` : ""}
+      <dt>2024-25</dt><dd>${p.prior_category ? `${esc(p.prior_category)}${p.prior_score != null ? ` · ${p.prior_score.toFixed(1)}` : ""}${p.score_change != null ? ` <span class="note">(${signed(p.score_change)})</span>` : ""}` : `<span class="note">no result (new or renamed)</span>`}</dd>
       <dt class="sep">Enrollment</dt><dd class="sep">${p.enrollment ?? "—"}</dd>
       <dt>Locale</dt><dd>${esc(p.locale || "—")}</dd>
+      <dt>Econ. disadv.</dt><dd>${pct(p.econ_disadv)}${p.econ_tested ? ` <span class="note">of tested students</span>` : ""}</dd>
+      <dt>Zone</dt><dd>${(ZONE_SOURCES[p.zone_source] || (() => "—"))(p)}</dd>
       <dt>Zone income</dt><dd>${moneyFull(p.zone_income)}</dd>
       <dt>vs. division</dt><dd>${rel == null ? "—" : rel.toFixed(2) + "×"}</dd>
       <dt>Tract income</dt><dd>${moneyFull(p.tract_income)}${p.tract_income_moe ? ` <span class="note">±${p.tract_income_moe.toLocaleString()}</span>` : ""}</dd>
@@ -124,7 +138,7 @@ function selectSchool(id, { fly = false } = {}) {
   m.setStyle(markerStyle(m.feature.properties, true)).bringToFront();
   const z = zoneData.get(id);
   if (z) {
-    selectedZone = L.geoJSON(z, { pane: "zones", interactive: false, style: { color: css("--ink"), weight: 2.5, dashArray: "6 4", fillColor: catColor(m.feature.properties.category), fillOpacity: 0.12 } }).addTo(map);
+    selectedZone = L.geoJSON(z, { pane: "zones", interactive: false, style: { color: css("--ink"), weight: 2.5, dashArray: dashed(m.feature.properties) ? "6 4" : null, fillColor: catColor(m.feature.properties.category), fillOpacity: 0.12 } }).addTo(map);
     if (fly) map.flyToBounds(selectedZone.getBounds().pad(0.15), { maxZoom: 13, duration: 0.6 });
   } else if (fly) map.flyTo(m.getLatLng(), 13);
   m.openPopup();
@@ -217,7 +231,7 @@ function drawZones() {
   if (!$("show-zones").checked) { map.removeLayer(zoneLayer); return; }
   for (const f of filtered()) {
     const z = zoneData.get(f.properties.ncessch);
-    if (z) zoneLayer.addLayer(L.geoJSON(z, { pane: "zones", interactive: false, style: { color: catColor(f.properties.category), weight: 1.5, opacity: 0.9, fillColor: catColor(f.properties.category), fillOpacity: 0.18 } }));
+    if (z) zoneLayer.addLayer(L.geoJSON(z, { pane: "zones", interactive: false, style: { color: catColor(f.properties.category), weight: 1.5, opacity: 0.9, dashArray: dashed(f.properties) ? "4 3" : null, fillColor: catColor(f.properties.category), fillOpacity: 0.18 } }));
   }
   zoneLayer.addTo(map);
 }
@@ -271,22 +285,28 @@ function spearman(a, b) {
 const strength = r => (Math.abs(r) < 0.1 ? "negligible" : Math.abs(r) < 0.3 ? "weak" : Math.abs(r) < 0.5 ? "moderate" : "strong");
 const hash = s => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return ((h >>> 0) % 1000) / 1000; };
 
-// Income measures span $20k–$250k+, so the x axis is logarithmic.
+// Income measures span $20k–$250k+, so their x axis is logarithmic; the disadvantaged share is linear.
 function xAxis(m, left, right, W, narrow) {
+  if (m === "econ_disadv") {
+    const x = v => left + Math.min(Math.max(v, 0), 1) * (W - left - right);
+    return { x, ticks: narrow ? [0, 0.5, 1] : [0, 0.2, 0.4, 0.6, 0.8, 1], log: false };
+  }
   const rel = m === "zone_income_vs_division";
   const lo = rel ? 0.4 : 20000, hi = rel ? 2.5 : 250000;
   const ticks = rel ? (narrow ? [0.5, 1, 2] : [0.5, 0.75, 1, 1.5, 2])
     : (narrow ? [25000, 50000, 100000, 200000] : [25000, 35000, 50000, 70000, 100000, 150000, 200000]);
   const x = v => left + (Math.log(Math.min(Math.max(v, lo), hi)) - Math.log(lo)) / (Math.log(hi) - Math.log(lo)) * (W - left - right);
-  return { x, ticks };
+  return { x, ticks, log: true };
 }
 
 function renderChart() {
   const m = state.measure, meta = MEASURES[m];
   const data = filtered().map(f => f.properties).filter(p => p.rank && p[m] != null);
   $("panel-count").textContent = `${data.length} rated schools in view`;
-  $("chart-title").textContent = state.view === "strip" ? "Income by performance category" : "Framework score vs. income";
-  if (state.view === "strip") renderStrip(data); else renderScatter(data);
+  const noun = meta.noun[0].toUpperCase() + meta.noun.slice(1);
+  $("chart-title").textContent = { strip: `${noun} by performance category`, scatter: `Framework score vs. ${meta.noun}`, change: `Score change since 2024-25 vs. ${meta.noun}` }[state.view];
+  if (state.view === "strip") renderStrip(data); else renderScatter(data, state.view === "change" ? "score_change" : "score");
+  const dir = (rho, up, down) => rho > 0 ? `, higher ${meta.noun} ↔ ${up}` : rho < 0 ? `, higher ${meta.noun} ↔ ${down}` : "";
 
   let text = `Showing the <b>${meta.long}</b>. `;
   if (state.view === "strip") {
@@ -296,13 +316,21 @@ function renderChart() {
     if (best != null && worst != null) text += `Median for <b>Distinguished</b> schools: <b>${meta.fmt(best)}</b>; for <b>Needs Intensive Support</b>: <b>${meta.fmt(worst)}</b>. `;
     if (data.length >= 10 && new Set(data.map(p => p.rank)).size >= 2) {
       const rho = -spearman(data.map(p => p[m]), data.map(p => p.rank));
-      text += `Rank correlation between income and category in view: <b>ρ = ${rho.toFixed(2)}</b> (${strength(rho)}${rho > 0 ? ", higher income ↔ better category" : rho < 0 ? ", higher income ↔ worse category" : ""}).`;
+      text += `Rank correlation between ${meta.noun} and category in view: <b>ρ = ${rho.toFixed(2)}</b> (${strength(rho)}${dir(rho, "better category", "worse category")}).`;
     }
-  } else {
+  } else if (state.view === "scatter") {
     const xs = data.filter(p => p.score != null);
     if (xs.length >= 10) {
       const rho = spearman(xs.map(p => p[m]), xs.map(p => p.score));
-      text += `Rank correlation between income and framework score in view: <b>ρ = ${rho.toFixed(2)}</b> (${strength(rho)}${rho > 0 ? ", higher income ↔ higher score" : rho < 0 ? ", higher income ↔ lower score" : ""}). Dashed lines mark the approximate category cut-offs (65 / 80 / 90).`;
+      text += `Rank correlation between ${meta.noun} and framework score in view: <b>ρ = ${rho.toFixed(2)}</b> (${strength(rho)}${dir(rho, "higher score", "lower score")}). Dashed lines mark the approximate category cut-offs (65 / 80 / 90).`;
+    }
+  } else {
+    const xs = data.filter(p => p.score_change != null);
+    if (xs.length >= 10) {
+      const ch = xs.map(p => p.score_change).sort((a, b) => a - b);
+      const up = xs.filter(p => p.score_change > 0).length;
+      const rho = spearman(xs.map(p => p[m]), xs.map(p => p.score_change));
+      text += `Median change in framework score: <b>${signed(quantile(ch, 0.5))}</b> points; ${Math.round(100 * up / xs.length)}% of these schools improved. Rank correlation between ${meta.noun} and change: <b>ρ = ${rho.toFixed(2)}</b> (${strength(rho)}${dir(rho, "bigger gains", "smaller gains")}). 2024-25 categories were named On Track / Off Track; they are shown here as Meets / Approaching.`;
     }
   }
   $("finding").innerHTML = text;
@@ -341,24 +369,24 @@ function renderStrip(data) {
   svg.querySelector("circle.hl")?.parentNode.appendChild(svg.querySelector("circle.hl"));
 }
 
-function renderScatter(data) {
-  const svg = $("chart"), m = state.measure, meta = MEASURES[m];
-  const pts = data.filter(p => p.score != null);
+function renderScatter(data, yKey) {
+  const svg = $("chart"), m = state.measure, meta = MEASURES[m], change = yKey === "score_change";
+  const pts = data.filter(p => p[yKey] != null);
   const W = svg.clientWidth || 800, narrow = W < 560;
   const left = 44, right = narrow ? 24 : 20, top = 10, bottom = 34, H = narrow ? 260 : 300;
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("height", H);
-  const { x, ticks } = xAxis(m, left, right, W, narrow);
-  const ylo = 40, yhi = 120, y = v => top + (yhi - Math.min(Math.max(v, ylo), yhi)) / (yhi - ylo) * (H - top - bottom);
+  const { x, ticks, log } = xAxis(m, left, right, W, narrow);
+  const [ylo, yhi, ystep] = change ? [-30, 30, 10] : [40, 120, 20], y = v => top + (yhi - Math.min(Math.max(v, ylo), yhi)) / (yhi - ylo) * (H - top - bottom);
 
   let out = "";
   for (const t of ticks) out += `<line class="gridline" x1="${x(t)}" x2="${x(t)}" y1="${top}" y2="${H - bottom}"/><text x="${x(t)}" y="${H - bottom + 14}" text-anchor="middle">${meta.fmt(t)}</text>`;
-  for (let t = ylo; t <= yhi; t += 20) out += `<line class="gridline" x1="${left}" x2="${W - right}" y1="${y(t)}" y2="${y(t)}"/><text x="${left - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`;
-  for (const c of SCORE_CUTS) out += `<line class="cut" x1="${left}" x2="${W - right}" y1="${y(c)}" y2="${y(c)}"/>`;
-  out += `<text x="${left}" y="${H - 4}">Framework score (y) · ${esc(meta.label.toLowerCase())}, log scale (x)</text>`;
+  for (let t = ylo; t <= yhi; t += ystep) out += `<line class="gridline" x1="${left}" x2="${W - right}" y1="${y(t)}" y2="${y(t)}"/><text x="${left - 6}" y="${y(t) + 4}" text-anchor="end">${change && t > 0 ? "+" + t : t}</text>`;
+  for (const c of change ? [0] : SCORE_CUTS) out += `<line class="cut" x1="${left}" x2="${W - right}" y1="${y(c)}" y2="${y(c)}"/>`;
+  out += `<text x="${left}" y="${H - 4}">${change ? "Score change since 2024-25" : "Framework score"} (y) · ${esc(meta.label.toLowerCase())}${log ? ", log scale" : ""} (x)</text>`;
   const sorted = [...pts].sort((a, b) => b.rank - a.rank); // draw best categories last
   for (const p of sorted) {
     const hl = p.ncessch === state.selected;
-    out += `<circle data-id="${p.ncessch}" cx="${x(p[m]).toFixed(1)}" cy="${y(p.score).toFixed(1)}" r="${hl ? 6 : 3}" fill="${catColor(p.category)}" class="${hl ? "hl" : ""}"/>`;
+    out += `<circle data-id="${p.ncessch}" cx="${x(p[m]).toFixed(1)}" cy="${y(p[yKey]).toFixed(1)}" r="${hl ? 6 : 3}" fill="${catColor(p.category)}" class="${hl ? "hl" : ""}"/>`;
   }
   if (!pts.length) out += `<text x="${W / 2}" y="${H / 2}" text-anchor="middle">No rated schools in view.</text>`;
   svg.innerHTML = out;
@@ -367,26 +395,42 @@ function renderScatter(data) {
 
 function renderTable(rows, data) {
   const m = state.measure, fmt = MEASURES[m].fmt;
-  let html = `<table><thead><tr><th>Category</th><th>Schools</th><th>25th pct</th><th>Median</th><th>75th pct</th><th>Min</th><th>Max</th><th>Median score</th></tr></thead><tbody>`;
+  let html = `<table><thead><tr><th>Category</th><th>Schools</th><th>25th pct</th><th>Median</th><th>75th pct</th><th>Min</th><th>Max</th><th>Median score</th><th>Median change</th></tr></thead><tbody>`;
   for (const c of rows) {
     const grp = data.filter(p => p.category === c.key);
     const v = grp.map(p => p[m]).sort((a, b) => a - b);
     const sc = grp.map(p => p.score).filter(s => s != null).sort((a, b) => a - b);
+    const ch = grp.map(p => p.score_change).filter(s => s != null).sort((a, b) => a - b);
     const cell = q => (v.length ? fmt(quantile(v, q)) : "—");
-    html += `<tr><td><span class="swatch" style="display:inline-block;vertical-align:-1px;margin-right:6px;background:${catColor(c.key)}"></span>${c.key}</td><td>${v.length}</td><td>${cell(0.25)}</td><td>${cell(0.5)}</td><td>${cell(0.75)}</td><td>${cell(0)}</td><td>${cell(1)}</td><td>${sc.length ? quantile(sc, 0.5).toFixed(1) : "—"}</td></tr>`;
+    html += `<tr><td><span class="swatch" style="display:inline-block;vertical-align:-1px;margin-right:6px;background:${catColor(c.key)}"></span>${c.key}</td><td>${v.length}</td><td>${cell(0.25)}</td><td>${cell(0.5)}</td><td>${cell(0.75)}</td><td>${cell(0)}</td><td>${cell(1)}</td><td>${sc.length ? quantile(sc, 0.5).toFixed(1) : "—"}</td><td>${ch.length ? signed(quantile(ch, 0.5)) : "—"}</td></tr>`;
   }
   html += `</tbody></table>`;
+  if (state.view === "change") html += transitionTable(data);
   if (summary) {
-    const t = summary.tests[m], s = summary.score_tests[m];
-    html += `<p class="note">All ${t.n} rated schools statewide (ignoring filters): Spearman ρ between income and category = ${(-t.spearman_rho).toFixed(2)} (p = ${t.spearman_p}); Kruskal–Wallis H = ${t.kruskal_H} (p = ${t.kruskal_p}); ρ between income and framework score = ${s.rho.toFixed(2)} (p = ${s.p}). Positive ρ means higher-income areas tend to do better. Correlation is not causation — school poverty, urbanicity and division resources all overlap with income.</p>`;
+    const t = summary.tests[m], s = summary.score_tests[m], sg = MEASURES[m].sign;
+    html += `<p class="note">All ${t.n} rated schools statewide (ignoring filters), with ρ signed so that <b>positive means better-off schools do better</b>: Spearman ρ with category = ${(-sg * t.spearman_rho).toFixed(2)} (p = ${t.spearman_p}); Kruskal–Wallis H = ${t.kruskal_H} (p = ${t.kruskal_p}); ρ with framework score = ${(sg * s.rho).toFixed(2)} (p = ${s.p}). Correlation is not causation — student poverty, urbanicity and division resources all overlap.</p>`;
   }
   $("table").innerHTML = html;
+}
+
+// Category in 2024-25 (rows) against 2025-26 (columns) for the schools in view.
+function transitionTable(data) {
+  const cats = CATS.filter(c => c.rank).map(c => c.key);
+  const SHORT = { "Distinguished": "Distinguished", "Meets Expectations": "Meets", "Approaching Expectations": "Approaching", "Needs Intensive Support": "Intensive" };
+  let html = `<table><thead><tr><th>2024-25 ↓ · 2025-26 →</th>${cats.map(c => `<th>${SHORT[c]}</th>`).join("")}</tr></thead><tbody>`;
+  for (const a of cats) {
+    html += `<tr><td>${SHORT[a]}</td>` + cats.map(b => {
+      const n = data.filter(p => p.prior_category === a && p.category === b).length;
+      return `<td${a === b ? ' style="font-weight:600"' : ""}>${n || "·"}</td>`;
+    }).join("") + `</tr>`;
+  }
+  return html + `</tbody></table>`;
 }
 
 $("chart").addEventListener("mousemove", e => {
   const id = e.target.dataset?.id; if (!id) return hideTip();
   const p = markers.get(id).feature.properties;
-  showTip(`<b>${esc(p.name)}</b><br>${esc(p.division)}<br>${esc(p.category)}${p.score != null ? ` · score ${p.score.toFixed(1)}` : ""}<br>${MEASURES[state.measure].label}: ${MEASURES[state.measure].fmt(p[state.measure])}`, e.clientX, e.clientY);
+  showTip(`<b>${esc(p.name)}</b><br>${esc(p.division)}<br>${esc(p.category)}${p.score != null ? ` · score ${p.score.toFixed(1)}` : ""}${state.view === "change" && p.score_change != null ? ` (${signed(p.score_change)})` : ""}<br>${MEASURES[state.measure].label}: ${MEASURES[state.measure].fmt(p[state.measure])}`, e.clientX, e.clientY);
 });
 $("chart").addEventListener("mouseleave", hideTip);
 $("chart").addEventListener("click", e => { const id = e.target.dataset?.id; if (id) selectSchool(id, { fly: true }); });

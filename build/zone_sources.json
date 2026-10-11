@@ -1,0 +1,963 @@
+[
+ {
+  "division": "Accomack County",
+  "level": "ES",
+  "url": "https://services2.arcgis.com/WI8dxiMINK74milM/arcgis/rest/services/Administrative_Public_View/FeatureServer/41",
+  "name_field": "Elementary",
+  "owner": "Accomack (Accomack County GIS)",
+  "label": "Accomack County GIS"
+ },
+ {
+  "division": "Accomack County",
+  "level": "HS",
+  "url": "https://services2.arcgis.com/WI8dxiMINK74milM/arcgis/rest/services/Administrative_Public_View/FeatureServer/41",
+  "name_field": "High",
+  "owner": "Accomack (Accomack County GIS)",
+  "aliases": {
+   "Chincoteague High": "Chincoteague Combined"
+  },
+  "label": "Accomack County GIS"
+ },
+ {
+  "division": "Accomack County",
+  "level": "MS",
+  "url": "https://services2.arcgis.com/WI8dxiMINK74milM/arcgis/rest/services/Administrative_Public_View/FeatureServer/41",
+  "name_field": "Middle",
+  "owner": "Accomack (Accomack County GIS)",
+  "aliases": {
+   "Chincoteague High": "Chincoteague Combined"
+  },
+  "label": "Accomack County GIS"
+ },
+ {
+  "division": "Albemarle County",
+  "level": "ES",
+  "url": "https://services2.arcgis.com/khVz7mitcPJHUnlM/arcgis/rest/services/school_districts/FeatureServer/0",
+  "name_field": "Dist_Name",
+  "owner": "AGOL_Data_Publisher (Albemarle County GIS)",
+  "label": "Albemarle County GIS"
+ },
+ {
+  "division": "Albemarle County",
+  "level": "HS",
+  "url": "https://services2.arcgis.com/khVz7mitcPJHUnlM/arcgis/rest/services/school_districts/FeatureServer/2",
+  "name_field": "Dist_Name",
+  "owner": "AGOL_Data_Publisher (Albemarle County GIS)",
+  "label": "Albemarle County GIS"
+ },
+ {
+  "division": "Albemarle County",
+  "level": "MS",
+  "url": "https://services2.arcgis.com/khVz7mitcPJHUnlM/arcgis/rest/services/school_districts/FeatureServer/1",
+  "name_field": "Dist_Name",
+  "owner": "AGOL_Data_Publisher (Albemarle County GIS)",
+  "label": "Albemarle County GIS"
+ },
+ {
+  "division": "Alexandria City",
+  "level": "ES",
+  "url": "https://maps.alexandriava.gov/arcgis/rest/services/alxMyNeighborhoodWm/MapServer/14",
+  "name_field": "School_Name",
+  "owner": "City of Alexandria GIS",
+  "label": "Alexandria City GIS"
+ },
+ {
+  "division": "Alexandria City",
+  "level": "MS",
+  "url": "https://maps.alexandriava.gov/arcgis/rest/services/alxMyNeighborhoodWm/MapServer/13",
+  "name_field": "School_Name",
+  "owner": "City of Alexandria GIS",
+  "label": "Alexandria City GIS"
+ },
+ {
+  "division": "Arlington County",
+  "level": "ES",
+  "url": "https://arlgis.arlingtonva.us/arcgis/rest/services/Public_Maps/School_Boundary_Locator_v2/MapServer/1",
+  "name_field": "ES_Name",
+  "owner": "Arlington County GIS",
+  "label": "Arlington County GIS"
+ },
+ {
+  "division": "Arlington County",
+  "level": "HS",
+  "url": "https://arlgis.arlingtonva.us/arcgis/rest/services/Public_Maps/School_Boundary_Locator_v2/MapServer/5",
+  "name_field": "HS_Name",
+  "owner": "Arlington County GIS",
+  "label": "Arlington County GIS"
+ },
+ {
+  "division": "Arlington County",
+  "level": "MS",
+  "url": "https://arlgis.arlingtonva.us/arcgis/rest/services/Public_Maps/School_Boundary_Locator_v2/MapServer/3",
+  "name_field": "MS_Name",
+  "owner": "Arlington County GIS",
+  "label": "Arlington County GIS"
+ },
+ {
+  "division": "Bedford County",
+  "level": "ES",
+  "url": "https://webgis.bedfordcountyva.gov/arcgis/rest/services/OpenData/OpenDataSchools/MapServer/1",
+  "name_field": "SCHOOL",
+  "owner": "publisher_BedfordVAGIS (Bedford County GIS)",
+  "label": "Bedford County GIS"
+ },
+ {
+  "division": "Bedford County",
+  "level": "HS",
+  "url": "https://webgis.bedfordcountyva.gov/arcgis/rest/services/OpenData/OpenDataSchools/MapServer/3",
+  "name_field": "HIGH_SCHOOL",
+  "owner": "publisher_BedfordVAGIS (Bedford County GIS)",
+  "label": "Bedford County GIS"
+ },
+ {
+  "division": "Bedford County",
+  "level": "MS",
+  "url": "https://webgis.bedfordcountyva.gov/arcgis/rest/services/OpenData/OpenDataSchools/MapServer/2",
+  "name_field": "MIDDLE_SCHOOL",
+  "owner": "publisher_BedfordVAGIS (Bedford County GIS)",
+  "label": "Bedford County GIS"
+ },
+ {
+  "division": "Botetourt County",
+  "level": "ES",
+  "url": "https://services6.arcgis.com/6h5xc2eGkGuRiFia/arcgis/rest/services/Elementary_School_Districts/FeatureServer/0",
+  "name_field": "SCHOOLNM",
+  "owner": "webgis_botetourt (Botetourt County GIS)",
+  "label": "Botetourt County GIS"
+ },
+ {
+  "division": "Botetourt County",
+  "level": "HS",
+  "url": "https://services6.arcgis.com/6h5xc2eGkGuRiFia/arcgis/rest/services/High_School_Districts/FeatureServer/0",
+  "name_field": "SCHOOLNAME",
+  "owner": "webgis_botetourt (Botetourt County GIS)",
+  "label": "Botetourt County GIS"
+ },
+ {
+  "division": "Botetourt County",
+  "level": "MS",
+  "url": "https://services6.arcgis.com/6h5xc2eGkGuRiFia/arcgis/rest/services/Middle_School_Districts/FeatureServer/0",
+  "name_field": "SCHOOLNAME",
+  "owner": "webgis_botetourt (Botetourt County GIS)",
+  "label": "Botetourt County GIS"
+ },
+ {
+  "division": "Campbell County",
+  "level": "ES",
+  "url": "https://gis.co.campbell.va.us/arcgis/rest/services/Public_Data/School_Jurisdictions/MapServer/10",
+  "name_field": "ELEMENTARY",
+  "owner": "GIS_Office_CampbellVA (Campbell County GIS)",
+  "label": "Campbell County GIS"
+ },
+ {
+  "division": "Campbell County",
+  "level": "HS",
+  "url": "https://gis.co.campbell.va.us/arcgis/rest/services/Public_Data/School_Jurisdictions/MapServer/10",
+  "name_field": "HIGH",
+  "owner": "GIS_Office_CampbellVA (Campbell County GIS)",
+  "label": "Campbell County GIS"
+ },
+ {
+  "division": "Campbell County",
+  "level": "MS",
+  "url": "https://gis.co.campbell.va.us/arcgis/rest/services/Public_Data/School_Jurisdictions/MapServer/10",
+  "name_field": "MIDDLE",
+  "owner": "GIS_Office_CampbellVA (Campbell County GIS)",
+  "label": "Campbell County GIS"
+ },
+ {
+  "division": "Charlottesville City",
+  "level": "ES",
+  "url": "https://gisweb.charlottesville.org/arcgis/rest/services/OpenData_1/MapServer/16",
+  "name_field": "ZONE",
+  "owner": "CharlottesvilleAdmin (City of Charlottesville GIS)",
+  "label": "Charlottesville City GIS"
+ },
+ {
+  "division": "Chesapeake City",
+  "level": "ES",
+  "url": "https://services.arcgis.com/LcyMcTk2tV5FXPLX/arcgis/rest/services/ESZones202627/FeatureServer/0",
+  "name_field": "Elem_Name",
+  "owner": "janae (Chesapeake Public Schools GIS)",
+  "label": "Chesapeake City GIS"
+ },
+ {
+  "division": "Chesapeake City",
+  "level": "ES",
+  "url": "https://services.arcgis.com/LcyMcTk2tV5FXPLX/arcgis/rest/services/ESZones202627/FeatureServer/0",
+  "name_field": "Int_Name",
+  "where": "Int_Name <> ' '",
+  "owner": "janae (Chesapeake Public Schools GIS)",
+  "label": "Chesapeake City GIS"
+ },
+ {
+  "division": "Chesapeake City",
+  "level": "HS",
+  "url": "https://services.arcgis.com/LcyMcTk2tV5FXPLX/arcgis/rest/services/HSZones202627/FeatureServer/0",
+  "name_field": "High_Name",
+  "owner": "janae (Chesapeake Public Schools GIS)",
+  "label": "Chesapeake City GIS"
+ },
+ {
+  "division": "Chesapeake City",
+  "level": "MS",
+  "url": "https://services.arcgis.com/LcyMcTk2tV5FXPLX/arcgis/rest/services/MSZones202627/FeatureServer/0",
+  "name_field": "Mid_Name",
+  "owner": "janae (Chesapeake Public Schools GIS)",
+  "label": "Chesapeake City GIS"
+ },
+ {
+  "division": "Chesterfield County",
+  "level": "ES",
+  "url": "https://services3.arcgis.com/TsynfzBSE6sXfoLq/arcgis/rest/services/Administrative_ProdA/FeatureServer/1",
+  "name_field": "SchoolName",
+  "owner": "Chesterfield_County",
+  "label": "Chesterfield County GIS"
+ },
+ {
+  "division": "Chesterfield County",
+  "level": "HS",
+  "url": "https://services3.arcgis.com/TsynfzBSE6sXfoLq/arcgis/rest/services/Administrative_ProdA/FeatureServer/6",
+  "name_field": "SchoolName",
+  "owner": "Chesterfield_County",
+  "label": "Chesterfield County GIS"
+ },
+ {
+  "division": "Chesterfield County",
+  "level": "MS",
+  "url": "https://services3.arcgis.com/TsynfzBSE6sXfoLq/arcgis/rest/services/Administrative_ProdA/FeatureServer/10",
+  "name_field": "SchoolName",
+  "owner": "Chesterfield_County",
+  "label": "Chesterfield County GIS"
+ },
+ {
+  "division": "Culpeper County",
+  "level": "ES",
+  "url": "https://services3.arcgis.com/KkgpUIloCxkczPwY/arcgis/rest/services/CCPS_Locator_20240828_WFL1/FeatureServer/3",
+  "name_field": "label",
+  "owner": "karen.jackson_woolpertinc (Woolpert, consultant for Culpeper County Public Schools)",
+  "label": "Culpeper County GIS"
+ },
+ {
+  "division": "Culpeper County",
+  "level": "HS",
+  "url": "https://services3.arcgis.com/KkgpUIloCxkczPwY/arcgis/rest/services/CCPS_Locator_20240828_WFL1/FeatureServer/2",
+  "name_field": "HighSCH_12",
+  "owner": "karen.jackson_woolpertinc (Woolpert, consultant for CCPS)",
+  "label": "Culpeper County GIS"
+ },
+ {
+  "division": "Culpeper County",
+  "level": "MS",
+  "url": "https://services3.arcgis.com/KkgpUIloCxkczPwY/arcgis/rest/services/CCPS_Locator_20240828_WFL1/FeatureServer/1",
+  "name_field": "Middle_12",
+  "owner": "karen.jackson_woolpertinc (Woolpert, consultant for CCPS)",
+  "label": "Culpeper County GIS"
+ },
+ {
+  "division": "Danville City",
+  "level": "ES",
+  "url": "https://services3.arcgis.com/b7ay1OgWNo9QMMMz/arcgis/rest/services/DanvilleCitySchoolDistrict_SchoolBoundaries/FeatureServer/0",
+  "name_field": "NAME",
+  "where": "TYPE<>'M'",
+  "owner": "Danville_GIS (City of Danville GIS)",
+  "label": "Danville City GIS"
+ },
+ {
+  "division": "Danville City",
+  "level": "MS",
+  "url": "https://services3.arcgis.com/b7ay1OgWNo9QMMMz/arcgis/rest/services/DanvilleCitySchoolDistrict_SchoolBoundaries/FeatureServer/0",
+  "name_field": "NAME",
+  "where": "TYPE='M'",
+  "owner": "Danville_GIS (City of Danville GIS)",
+  "label": "Danville City GIS"
+ },
+ {
+  "division": "Fairfax County",
+  "level": "ES",
+  "url": "https://services1.arcgis.com/ioennV6PpG5Xodq0/arcgis/rest/services/Elementary_School_Attendance_Areas/FeatureServer/0",
+  "name_field": "SCHOOL_NAME",
+  "owner": "FX.AuthData",
+  "label": "Fairfax County GIS"
+ },
+ {
+  "division": "Fairfax County",
+  "level": "HS",
+  "url": "https://services1.arcgis.com/ioennV6PpG5Xodq0/arcgis/rest/services/High_School_Attendance_Areas/FeatureServer/0",
+  "name_field": "SCHOOL_NAME",
+  "owner": "FX.AuthData",
+  "aliases": {
+   "Fairfax County Adult High": "-"
+  },
+  "label": "Fairfax County GIS"
+ },
+ {
+  "division": "Fairfax County",
+  "level": "MS",
+  "url": "https://services1.arcgis.com/ioennV6PpG5Xodq0/arcgis/rest/services/Middle_School_Attendance_Areas/FeatureServer/0",
+  "name_field": "SCHOOL_NAME",
+  "owner": "FX.AuthData",
+  "label": "Fairfax County GIS"
+ },
+ {
+  "division": "Fauquier County",
+  "level": "ES",
+  "url": "https://services.arcgis.com/oAoeYJ1kqmAwcEC2/arcgis/rest/services/Elementary_School_Districts_DL/FeatureServer/0",
+  "name_field": "NAME",
+  "owner": "fauquierGIS (Fauquier County GIS)",
+  "label": "Fauquier County GIS"
+ },
+ {
+  "division": "Fauquier County",
+  "level": "HS",
+  "url": "https://services.arcgis.com/oAoeYJ1kqmAwcEC2/arcgis/rest/services/High_School_Districts_DL/FeatureServer/0",
+  "name_field": "NAME",
+  "owner": "fauquierGIS (Fauquier County GIS)",
+  "label": "Fauquier County GIS"
+ },
+ {
+  "division": "Fauquier County",
+  "level": "MS",
+  "url": "https://services.arcgis.com/oAoeYJ1kqmAwcEC2/arcgis/rest/services/Middle_School_Districts_DL/FeatureServer/0",
+  "name_field": "NAME",
+  "owner": "fauquierGIS (Fauquier County GIS)",
+  "label": "Fauquier County GIS"
+ },
+ {
+  "division": "Franklin County",
+  "level": "ES",
+  "url": "https://services9.arcgis.com/AzdpqVmJ5GjGWCoI/arcgis/rest/services/FranklinCoVA_PublicSchooolAttendanceZones_Proposed2025/FeatureServer/0",
+  "name_field": "Dist_Name",
+  "owner": "FC.GIS (Franklin County VA GIS)",
+  "label": "Franklin County GIS"
+ },
+ {
+  "division": "Hanover County",
+  "level": "ES",
+  "url": "https://services2.arcgis.com/sKZWgJlU6SekCzQV/arcgis/rest/services/Elementary_School_Districts_2026/FeatureServer/0",
+  "name_field": "Zone",
+  "owner": "hanovercounty (Hanover County GIS)",
+  "label": "Hanover County GIS"
+ },
+ {
+  "division": "Hanover County",
+  "level": "HS",
+  "url": "https://services2.arcgis.com/sKZWgJlU6SekCzQV/arcgis/rest/services/Middle_and_High_School_Districts_2026/FeatureServer/0",
+  "name_field": "Middle_Hig",
+  "owner": "hanovercounty (Hanover County GIS)",
+  "split": {
+   "sep": " - ",
+   "part": 1
+  },
+  "label": "Hanover County GIS"
+ },
+ {
+  "division": "Hanover County",
+  "level": "MS",
+  "url": "https://services2.arcgis.com/sKZWgJlU6SekCzQV/arcgis/rest/services/Middle_and_High_School_Districts_2026/FeatureServer/0",
+  "name_field": "Middle_Hig",
+  "owner": "hanovercounty (Hanover County GIS)",
+  "split": {
+   "sep": " - ",
+   "part": 0
+  },
+  "label": "Hanover County GIS"
+ },
+ {
+  "division": "Harrisonburg City",
+  "level": "ES",
+  "url": "https://gis.harrisonburgva.gov/arcgis/rest/services/CityServices/SchoolDistrictMap/FeatureServer/1",
+  "name_field": "NAME2",
+  "owner": "City of Harrisonburg GIS (ChipBrownHBG)",
+  "label": "Harrisonburg City GIS"
+ },
+ {
+  "division": "Harrisonburg City",
+  "level": "HS",
+  "url": "https://gis.harrisonburgva.gov/arcgis/rest/services/CityServices/SchoolDistrictMap/FeatureServer/5",
+  "name_field": "HighSchool",
+  "owner": "City of Harrisonburg GIS",
+  "label": "Harrisonburg City GIS"
+ },
+ {
+  "division": "Harrisonburg City",
+  "level": "MS",
+  "url": "https://gis.harrisonburgva.gov/arcgis/rest/services/CityServices/SchoolDistrictMap/FeatureServer/5",
+  "name_field": "MiddleSchl",
+  "owner": "City of Harrisonburg GIS",
+  "label": "Harrisonburg City GIS"
+ },
+ {
+  "division": "Henrico County",
+  "level": "ES",
+  "url": "https://portal.henrico.gov/mapping/rest/services/HCPS/HCPS_Elementary_Zones_2026_2027_External/FeatureServer/0",
+  "name_field": "DistrictName",
+  "owner": "Henrico County GIS (HCPS)",
+  "aliases": {
+   "Anthony P. Mehfoud Elementary": "MEHFOUD&VARINA",
+   "Varina Elementary": "MEHFOUD&VARINA"
+  },
+  "label": "Henrico County GIS"
+ },
+ {
+  "division": "Henrico County",
+  "level": "HS",
+  "url": "https://portal.henrico.gov/mapping/rest/services/HCPS/HCPS_High_Zones_2026_2027_External/FeatureServer/0",
+  "name_field": "DistrictName",
+  "owner": "Henrico County GIS (HCPS)",
+  "label": "Henrico County GIS"
+ },
+ {
+  "division": "Henrico County",
+  "level": "MS",
+  "url": "https://portal.henrico.gov/mapping/rest/services/HCPS/HCPS_Middle_Zones_2026_2027_External/FeatureServer/0",
+  "name_field": "OfficialName",
+  "owner": "Henrico County GIS (HCPS)",
+  "label": "Henrico County GIS"
+ },
+ {
+  "division": "King George County",
+  "level": "ES",
+  "url": "https://services2.arcgis.com/S8zMJrpz61FbvL5t/arcgis/rest/services/SchoolLocator/FeatureServer/1",
+  "name_field": "NAME",
+  "owner": "KingGeorge (King George County GIS)",
+  "label": "King George County GIS"
+ },
+ {
+  "division": "Loudoun County",
+  "level": "ES",
+  "url": "https://services3.arcgis.com/PgITX2Sy39aYHLDV/arcgis/rest/services/eszonesAGOL/FeatureServer/0",
+  "name_field": "ELEM_CODE",
+  "owner": "Vicki.Keegan (LCPS)",
+  "name_lookup": {
+   "url": "https://services3.arcgis.com/PgITX2Sy39aYHLDV/arcgis/rest/services/LCPS_SchoolSites_Ref/FeatureServer/0",
+   "code_field": "SCH_CODE",
+   "name_field": "NAME"
+  },
+  "label": "Loudoun County GIS"
+ },
+ {
+  "division": "Loudoun County",
+  "level": "HS",
+  "url": "https://services3.arcgis.com/PgITX2Sy39aYHLDV/arcgis/rest/services/hszonesAGOL/FeatureServer/0",
+  "name_field": "HIGH_CODE",
+  "owner": "Vicki.Keegan (LCPS)",
+  "name_lookup": {
+   "url": "https://services3.arcgis.com/PgITX2Sy39aYHLDV/arcgis/rest/services/LCPS_SchoolSites_Ref/FeatureServer/0",
+   "code_field": "SCH_CODE",
+   "name_field": "NAME"
+  },
+  "label": "Loudoun County GIS"
+ },
+ {
+  "division": "Loudoun County",
+  "level": "MS",
+  "url": "https://services3.arcgis.com/PgITX2Sy39aYHLDV/arcgis/rest/services/mszonesAGOL/FeatureServer/0",
+  "name_field": "INT_CODE",
+  "owner": "Vicki.Keegan (LCPS)",
+  "name_lookup": {
+   "url": "https://services3.arcgis.com/PgITX2Sy39aYHLDV/arcgis/rest/services/LCPS_SchoolSites_Ref/FeatureServer/0",
+   "code_field": "SCH_CODE",
+   "name_field": "NAME"
+  },
+  "label": "Loudoun County GIS"
+ },
+ {
+  "division": "Lynchburg City",
+  "level": "ES",
+  "url": "https://mapviewer.lynchburgva.gov/ArcGIS/rest/services/OpenData/ODPDynamic/MapServer/23",
+  "name_field": "District",
+  "owner": "LynchburgGIS (City of Lynchburg)",
+  "label": "Lynchburg City GIS"
+ },
+ {
+  "division": "Lynchburg City",
+  "level": "HS",
+  "url": "https://mapviewer.lynchburgva.gov/ArcGIS/rest/services/OpenData/ODPDynamic/MapServer/24",
+  "name_field": "District",
+  "owner": "LynchburgGIS (City of Lynchburg)",
+  "label": "Lynchburg City GIS"
+ },
+ {
+  "division": "Lynchburg City",
+  "level": "MS",
+  "url": "https://mapviewer.lynchburgva.gov/ArcGIS/rest/services/OpenData/ODPDynamic/MapServer/25",
+  "name_field": "District",
+  "owner": "LynchburgGIS (City of Lynchburg)",
+  "aliases": {
+   "Paul Laurence Dunbar Middle for Innovation": "PL DUNBAR"
+  },
+  "label": "Lynchburg City GIS"
+ },
+ {
+  "division": "Manassas City",
+  "level": "ES",
+  "url": "https://services1.arcgis.com/3wpOgOChiWXPeFWB/arcgis/rest/services/School_Boundaries/FeatureServer/0",
+  "name_field": "fac_name",
+  "owner": "Mmontgomery_COM (City of Manassas GIS)",
+  "label": "Manassas City GIS"
+ },
+ {
+  "division": "Manassas City",
+  "level": "ES",
+  "label": "Manassas City GIS",
+  "owner": "City of Manassas",
+  "url": "https://services1.arcgis.com/3wpOgOChiWXPeFWB/arcgis/rest/services/School_Boundaries/FeatureServer/1",
+  "name_field": "fac_name"
+ },
+ {
+  "division": "Newport News City",
+  "level": "ES",
+  "url": "https://maps.nnva.gov/gis/rest/services/Operational/SchoolZoneElementarySchool/MapServer/0",
+  "name_field": "DISTRCTNAME",
+  "owner": "NNVA_ADMIN (City of Newport News GIS)",
+  "label": "Newport News City GIS"
+ },
+ {
+  "division": "Newport News City",
+  "level": "HS",
+  "url": "https://maps.nnva.gov/gis/rest/services/Operational/SchoolZoneHighSchool/MapServer/0",
+  "name_field": "NAME",
+  "owner": "NNVA_ADMIN (City of Newport News GIS)",
+  "label": "Newport News City GIS"
+ },
+ {
+  "division": "Newport News City",
+  "level": "MS",
+  "url": "https://maps.nnva.gov/gis/rest/services/Operational/SchoolZoneMiddleSchool/MapServer/0",
+  "name_field": "NAME",
+  "owner": "NNVA_ADMIN (City of Newport News GIS)",
+  "label": "Newport News City GIS"
+ },
+ {
+  "division": "Norfolk City",
+  "level": "ES",
+  "url": "https://gisshare.norfolk.gov/pubserver/rest/services/OpenData/Maps/FeatureServer/1",
+  "name_field": "ES_NAME",
+  "owner": "GISDEV (City of Norfolk)",
+  "aliases": {
+   "P.B. Young Sr. Elementary": "PB Young (PK-2) / Ruffner Academy (3-5)"
+  },
+  "label": "Norfolk City GIS"
+ },
+ {
+  "division": "Norfolk City",
+  "level": "HS",
+  "url": "https://gisshare.norfolk.gov/pubserver/rest/services/OpenData/Maps/FeatureServer/3",
+  "name_field": "HS_NAME",
+  "owner": "GISDEV (City of Norfolk)",
+  "label": "Norfolk City GIS"
+ },
+ {
+  "division": "Norfolk City",
+  "level": "MS",
+  "url": "https://gisshare.norfolk.gov/pubserver/rest/services/OpenData/Maps/FeatureServer/2",
+  "name_field": "MS_NAME",
+  "owner": "GISDEV (City of Norfolk)",
+  "label": "Norfolk City GIS"
+ },
+ {
+  "division": "Orange County",
+  "level": "ES",
+  "url": "https://gis.orangecountyva.gov/arcgis/rest/services/OpenData/Boundaries/MapServer/2",
+  "name_field": "DistrictName",
+  "owner": "OrangeOpenData (Orange County VA GIS)",
+  "aliases": {
+   "Unionville Elementary": "Unionville/Lightfoot Elementary",
+   "Lightfoot Elementary": "Unionville/Lightfoot Elementary"
+  },
+  "label": "Orange County GIS"
+ },
+ {
+  "division": "Orange County",
+  "level": "MS",
+  "url": "https://gis.orangecountyva.gov/arcgis/rest/services/OpenData/Boundaries/MapServer/5",
+  "name_field": "DistrictName",
+  "owner": "OrangeOpenData (Orange County VA GIS)",
+  "label": "Orange County GIS"
+ },
+ {
+  "division": "Page County",
+  "level": "ES",
+  "url": "https://services1.arcgis.com/vzTTDUcNo7s6eLCJ/arcgis/rest/services/PageCoVA_SchoolDistricts/FeatureServer/0",
+  "name_field": "ELEMENTARY",
+  "owner": "JoshHahn (individual account; org unverified)",
+  "label": "Page County GIS"
+ },
+ {
+  "division": "Page County",
+  "level": "HS",
+  "url": "https://services1.arcgis.com/vzTTDUcNo7s6eLCJ/arcgis/rest/services/PageCoVA_SchoolDistricts/FeatureServer/0",
+  "name_field": "HIGH",
+  "owner": "JoshHahn (individual account; org unverified)",
+  "label": "Page County GIS"
+ },
+ {
+  "division": "Page County",
+  "level": "MS",
+  "url": "https://services1.arcgis.com/vzTTDUcNo7s6eLCJ/arcgis/rest/services/PageCoVA_SchoolDistricts/FeatureServer/0",
+  "name_field": "MIDDLE",
+  "owner": "JoshHahn (individual account; org unverified)",
+  "label": "Page County GIS"
+ },
+ {
+  "division": "Pittsylvania County",
+  "level": "ES",
+  "url": "https://services2.arcgis.com/mTpBDvIjv8OhMDVd/arcgis/rest/services/Elementary_School_Zones/FeatureServer/5",
+  "name_field": "NAME",
+  "owner": "barryguidry (Pittsylvania County GIS)",
+  "aliases": {
+   "Mount Airy Elementary": "Mt. Airy Elementary School"
+  },
+  "label": "Pittsylvania County GIS"
+ },
+ {
+  "division": "Pittsylvania County",
+  "level": "HS",
+  "url": "https://services2.arcgis.com/mTpBDvIjv8OhMDVd/arcgis/rest/services/High_School_Zones/FeatureServer/7",
+  "name_field": "NAME",
+  "owner": "barryguidry (Pittsylvania County GIS)",
+  "label": "Pittsylvania County GIS"
+ },
+ {
+  "division": "Pittsylvania County",
+  "level": "MS",
+  "url": "https://services2.arcgis.com/mTpBDvIjv8OhMDVd/arcgis/rest/services/Middle_School_Zones/FeatureServer/6",
+  "name_field": "NAME",
+  "owner": "barryguidry (Pittsylvania County GIS)",
+  "label": "Pittsylvania County GIS"
+ },
+ {
+  "division": "Portsmouth City",
+  "level": "ES",
+  "url": "https://services1.arcgis.com/nGsguNiHLn7MU4R4/arcgis/rest/services/Elementary_School_Attendance_Zones/FeatureServer/0",
+  "name_field": "SCHOOL",
+  "owner": "ghamel56 (Portsmouth city org)",
+  "label": "Portsmouth City GIS"
+ },
+ {
+  "division": "Portsmouth City",
+  "level": "HS",
+  "url": "https://services1.arcgis.com/nGsguNiHLn7MU4R4/arcgis/rest/services/High_School_Attendance_Zones/FeatureServer/0",
+  "name_field": "SCHOOL",
+  "owner": "ghamel56 (Portsmouth city org)",
+  "label": "Portsmouth City GIS"
+ },
+ {
+  "division": "Portsmouth City",
+  "level": "MS",
+  "url": "https://services1.arcgis.com/nGsguNiHLn7MU4R4/arcgis/rest/services/Middle_School_Attendance_Zones/FeatureServer/0",
+  "name_field": "SCHOOL",
+  "owner": "ghamel56 (Portsmouth city org)",
+  "label": "Portsmouth City GIS"
+ },
+ {
+  "division": "Powhatan County",
+  "level": "ES",
+  "url": "https://services5.arcgis.com/nip9boeHfv9Av5yj/arcgis/rest/services/Elementary_School_Districts/FeatureServer/0",
+  "name_field": "Zone",
+  "owner": "jgarcia@powhatanva.gov_powhatancounty (Powhatan County GIS)",
+  "label": "Powhatan County GIS"
+ },
+ {
+  "division": "Prince William County",
+  "level": "ES",
+  "url": "https://gisweb.pwcva.gov/arcgis/rest/services/GTS/Education/MapServer/0",
+  "name_field": "SchoolName",
+  "where": "SchoolName <> 'Out of District'",
+  "owner": "PrinceWilliamCounty (county GIS)",
+  "label": "Prince William County GIS"
+ },
+ {
+  "division": "Prince William County",
+  "level": "HS",
+  "url": "https://gisweb.pwcva.gov/arcgis/rest/services/GTS/Education/MapServer/3",
+  "name_field": "SchoolName",
+  "where": "SchoolName <> 'Out of District'",
+  "owner": "PrinceWilliamCounty (county GIS)",
+  "label": "Prince William County GIS"
+ },
+ {
+  "division": "Prince William County",
+  "level": "MS",
+  "url": "https://gisweb.pwcva.gov/arcgis/rest/services/GTS/Education/MapServer/1",
+  "name_field": "SchoolName",
+  "where": "SchoolName <> 'Out of District'",
+  "owner": "PrinceWilliamCounty (county GIS)",
+  "label": "Prince William County GIS"
+ },
+ {
+  "division": "Richmond City",
+  "level": "ES",
+  "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/arcgis/rest/services/ElementarySchoolZones/FeatureServer/0",
+  "name_field": "Name",
+  "owner": "richmondvagis (City of Richmond)",
+  "label": "Richmond City GIS"
+ },
+ {
+  "division": "Richmond City",
+  "level": "HS",
+  "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/arcgis/rest/services/HighSchoolZones/FeatureServer/0",
+  "name_field": "Name",
+  "owner": "richmondvagis (City of Richmond)",
+  "label": "Richmond City GIS"
+ },
+ {
+  "division": "Richmond City",
+  "level": "MS",
+  "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/arcgis/rest/services/MiddleSchoolZones/FeatureServer/0",
+  "name_field": "Name",
+  "owner": "richmondvagis (City of Richmond)",
+  "label": "Richmond City GIS"
+ },
+ {
+  "division": "Roanoke City",
+  "level": "ES",
+  "url": "https://gis03.roanokeva.gov/arcgis/rest/services/Public/Schools_Elementary/FeatureServer/1",
+  "name_field": "LABEL",
+  "owner": "roanokeva (City of Roanoke GIS)",
+  "label": "Roanoke City GIS"
+ },
+ {
+  "division": "Roanoke City",
+  "level": "HS",
+  "url": "https://gis03.roanokeva.gov/arcgis/rest/services/Public/Schools_High/FeatureServer/1",
+  "name_field": "LABEL",
+  "owner": "roanokeva (City of Roanoke GIS)",
+  "label": "Roanoke City GIS"
+ },
+ {
+  "division": "Roanoke City",
+  "level": "MS",
+  "url": "https://gis03.roanokeva.gov/arcgis/rest/services/Public/Schools_Middle/FeatureServer/1",
+  "name_field": "LABEL",
+  "owner": "roanokeva (City of Roanoke GIS)",
+  "label": "Roanoke City GIS"
+ },
+ {
+  "division": "Roanoke County",
+  "level": "ES",
+  "url": "https://services1.arcgis.com/VlZ73DcE2ya6FnSK/arcgis/rest/services/Elementary_School_Districts_Hosted/FeatureServer/0",
+  "name_field": "Elm_School_Name",
+  "owner": "wrayda (Roanoke County GIS)",
+  "label": "Roanoke County GIS"
+ },
+ {
+  "division": "Roanoke County",
+  "level": "HS",
+  "url": "https://services1.arcgis.com/VlZ73DcE2ya6FnSK/arcgis/rest/services/Middle_and_High_School_Districts_Hosted/FeatureServer/0",
+  "name_field": "High_School_Name",
+  "owner": "wrayda (Roanoke County GIS)",
+  "label": "Roanoke County GIS"
+ },
+ {
+  "division": "Roanoke County",
+  "level": "MS",
+  "url": "https://services1.arcgis.com/VlZ73DcE2ya6FnSK/arcgis/rest/services/Middle_and_High_School_Districts_Hosted/FeatureServer/0",
+  "name_field": "Mid_School_Name",
+  "owner": "wrayda (Roanoke County GIS)",
+  "label": "Roanoke County GIS"
+ },
+ {
+  "division": "Salem City",
+  "level": "ES",
+  "url": "https://services7.arcgis.com/RL8aZgZHmJOdyNXk/arcgis/rest/services/School_Districts/FeatureServer/111",
+  "name_field": "DISTRICT",
+  "owner": "SalemVA_GIS (City of Salem GIS)",
+  "label": "Salem City GIS"
+ },
+ {
+  "division": "Shenandoah County",
+  "level": "ES",
+  "url": "https://services2.arcgis.com/8k2PygHqghVevhzy/arcgis/rest/services/School_Districts/FeatureServer/0",
+  "name_field": "DISTRICT",
+  "owner": "jth4qt_uvalibrary (UVA Library account - NOT county-owned; near-miss)",
+  "aliases": {
+   "Sandy Hook Elementary": "Northern Campus",
+   "W.W. Robinson Elementary": "Central Campus",
+   "Ashby-Lee Elementary": "Southern Campus"
+  },
+  "label": "Shenandoah County GIS"
+ },
+ {
+  "division": "Shenandoah County",
+  "level": "HS",
+  "url": "https://services2.arcgis.com/8k2PygHqghVevhzy/arcgis/rest/services/School_Districts/FeatureServer/0",
+  "name_field": "DISTRICT",
+  "owner": "jth4qt_uvalibrary (UVA Library account - NOT county-owned; near-miss)",
+  "aliases": {
+   "Strasburg High": "Northern Campus",
+   "Central High": "Central Campus",
+   "Stonewall Jackson High": "Southern Campus"
+  },
+  "label": "Shenandoah County GIS"
+ },
+ {
+  "division": "Shenandoah County",
+  "level": "MS",
+  "url": "https://services2.arcgis.com/8k2PygHqghVevhzy/arcgis/rest/services/School_Districts/FeatureServer/0",
+  "name_field": "DISTRICT",
+  "owner": "jth4qt_uvalibrary (UVA Library account - NOT county-owned; near-miss)",
+  "aliases": {
+   "Signal Knob Middle": "Northern Campus",
+   "Peter Muhlenberg Middle": "Central Campus",
+   "North Fork Middle": "Southern Campus"
+  },
+  "label": "Shenandoah County GIS"
+ },
+ {
+  "division": "Spotsylvania County",
+  "level": "ES",
+  "url": "https://gis.spotsylvania.va.us/arcgis/rest/services/Spotsylvania_Public_Prod/FeatureServer/42",
+  "name_field": "ES_Name",
+  "owner": "Spotsylvania County GIS",
+  "aliases": {
+   "Spotsylvania Elementary": "Robert E. Lee Elementary"
+  },
+  "label": "Spotsylvania County GIS"
+ },
+ {
+  "division": "Spotsylvania County",
+  "level": "HS",
+  "url": "https://gis.spotsylvania.va.us/arcgis/rest/services/Spotsylvania_Public_Prod/FeatureServer/44",
+  "name_field": "HS_Name",
+  "owner": "Spotsylvania County GIS",
+  "label": "Spotsylvania County GIS"
+ },
+ {
+  "division": "Spotsylvania County",
+  "level": "MS",
+  "url": "https://gis.spotsylvania.va.us/arcgis/rest/services/Spotsylvania_Public_Prod/FeatureServer/43",
+  "name_field": "MS_Name",
+  "owner": "Spotsylvania County GIS",
+  "label": "Spotsylvania County GIS"
+ },
+ {
+  "division": "Stafford County",
+  "level": "ES",
+  "url": "https://services9.arcgis.com/VEbqiV0jZuocUaxq/arcgis/rest/services/Elementary_Boundaries/FeatureServer/0",
+  "name_field": "ES2324",
+  "owner": "SCPS_Planning (Stafford County Public Schools)",
+  "label": "Stafford County GIS"
+ },
+ {
+  "division": "Stafford County",
+  "level": "HS",
+  "url": "https://services9.arcgis.com/VEbqiV0jZuocUaxq/arcgis/rest/services/High_School_Boundaries/FeatureServer/0",
+  "name_field": "HS_2425",
+  "owner": "SCPS_Planning (Stafford County Public Schools)",
+  "label": "Stafford County GIS"
+ },
+ {
+  "division": "Stafford County",
+  "level": "MS",
+  "url": "https://services9.arcgis.com/VEbqiV0jZuocUaxq/arcgis/rest/services/MS_2025/FeatureServer/0",
+  "name_field": "MS2324",
+  "owner": "SCPS_Planning (Stafford County Public Schools)",
+  "label": "Stafford County GIS"
+ },
+ {
+  "division": "Staunton City",
+  "level": "ES",
+  "url": "https://services.arcgis.com/bp3MWUdz4OBPF6xz/arcgis/rest/services/School_Districts/FeatureServer/2",
+  "name_field": "SCHOOL",
+  "owner": "StauntonGIS (City of Staunton GIS)",
+  "label": "Staunton City GIS"
+ },
+ {
+  "division": "Virginia Beach City",
+  "level": "ES",
+  "url": "https://services5.arcgis.com/36soGIYKLrgDhHrr/arcgis/rest/services/VBCPS_2026_27_ESAttendanceZones/FeatureServer/0",
+  "name_field": "FULLNAME",
+  "owner": "VBCPS_GIS",
+  "aliases": {
+   "Diamond Springs Elementary": "TRI-CAMPUS",
+   "Newtown Elementary": "TRI-CAMPUS",
+   "Williams Elementary": "TRI-CAMPUS"
+  },
+  "label": "Virginia Beach City GIS"
+ },
+ {
+  "division": "Virginia Beach City",
+  "level": "HS",
+  "url": "https://services5.arcgis.com/36soGIYKLrgDhHrr/arcgis/rest/services/VBCPS_2026_27_HSAttendanceZones/FeatureServer/0",
+  "name_field": "FULLNAME",
+  "owner": "VBCPS_GIS",
+  "label": "Virginia Beach City GIS"
+ },
+ {
+  "division": "Virginia Beach City",
+  "level": "MS",
+  "url": "https://services5.arcgis.com/36soGIYKLrgDhHrr/arcgis/rest/services/VBCPS_2026_27_MSAttendanceZones/FeatureServer/0",
+  "name_field": "FULL_NAME",
+  "owner": "VBCPS_GIS",
+  "label": "Virginia Beach City GIS"
+ },
+ {
+  "division": "Williamsburg-James City County",
+  "level": "ES",
+  "url": "https://property.jamescitycountyva.gov/arcgis/rest/services/JCC/GIS_Data/FeatureServer/5",
+  "name_field": "NAME",
+  "owner": "khazelwood (James City County GIS)",
+  "label": "Williamsburg-James City County GIS"
+ },
+ {
+  "division": "Williamsburg-James City County",
+  "level": "HS",
+  "url": "https://property.jamescitycountyva.gov/arcgis/rest/services/JCC/GIS_Data/FeatureServer/7",
+  "name_field": "Name",
+  "owner": "khazelwood (James City County GIS)",
+  "label": "Williamsburg-James City County GIS"
+ },
+ {
+  "division": "Williamsburg-James City County",
+  "level": "MS",
+  "url": "https://property.jamescitycountyva.gov/arcgis/rest/services/JCC/GIS_Data/FeatureServer/6",
+  "name_field": "Name",
+  "owner": "khazelwood (James City County GIS)",
+  "label": "Williamsburg-James City County GIS"
+ },
+ {
+  "division": "Winchester City",
+  "level": "ES",
+  "url": "https://gis.winchesterva.gov/arcgis/rest/services/Winchester/SchoolDistricts/MapServer/0",
+  "name_field": "District_N",
+  "owner": "cwpublisher (City of Winchester GIS)",
+  "aliases": {
+   "Virginia Avenue Charlotte Dehart Elementary": "Virginia Ave"
+  },
+  "label": "Winchester City GIS"
+ },
+ {
+  "division": "York County",
+  "level": "ES",
+  "url": "https://maps.yorkcounty.gov/arcgis/rest/services/AGOservices/Boundary_Service/FeatureServer/6",
+  "name_field": "ELEMDIST",
+  "owner": "TimKropp (York County GIS)",
+  "label": "York County GIS"
+ },
+ {
+  "division": "York County",
+  "level": "HS",
+  "url": "https://maps.yorkcounty.gov/arcgis/rest/services/AGOservices/Boundary_Service/FeatureServer/7",
+  "name_field": "HIGHDIST",
+  "owner": "TimKropp (York County GIS)",
+  "aliases": {
+   "Bruton High": "BRUTON/QUEENS LAKE",
+   "York High": "YORK/YORKTOWN"
+  },
+  "label": "York County GIS"
+ },
+ {
+  "division": "York County",
+  "level": "MS",
+  "url": "https://maps.yorkcounty.gov/arcgis/rest/services/AGOservices/Boundary_Service/FeatureServer/7",
+  "name_field": "HIGHDIST",
+  "owner": "TimKropp (York County GIS)",
+  "aliases": {
+   "Queens Lake Middle": "BRUTON/QUEENS LAKE",
+   "Yorktown Middle": "YORK/YORKTOWN"
+  },
+  "label": "York County GIS"
+ }
+]

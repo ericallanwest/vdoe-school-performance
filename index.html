@@ -160,17 +160,18 @@ details summary { cursor: pointer; color: var(--ink-2); font-size: 12.5px; margi
     <div class="legend-ramp" id="ramp"></div>
     <div class="legend-ticks" id="ramp-ticks"></div>
   </div>
-  <label class="toggle"><input type="checkbox" id="show-zones"> Approximate attendance zones (visible schools)</label>
-  <p class="note">Click a school to outline its approximate zone.</p>
+  <label class="toggle"><input type="checkbox" id="show-zones"> Attendance zones (visible schools)</label>
+  <p class="note">Click a school to outline its zone. Solid outlines are published boundaries; dashed ones are approximations.</p>
 
   <h2>About the data</h2>
   <p class="note">
-    <b>Performance:</b> <a href="https://www.doe.virginia.gov/teaching-learning-assessment/road-to-readiness-school-performance-and-support-framework-resource-hub/spsf-prior-year-results/fall-2026-statewide-results" target="_blank" rel="noopener">VDOE statewide SPSF results, 2025-26</a> (framework score, category, federal identification).
+    <b>Performance:</b> <a href="https://www.doe.virginia.gov/teaching-learning-assessment/road-to-readiness-school-performance-and-support-framework-resource-hub/spsf-prior-year-results/fall-2026-statewide-results" target="_blank" rel="noopener">VDOE statewide SPSF results, 2025-26</a> (framework score, category, federal identification) and <a href="https://www.doe.virginia.gov/teaching-learning-assessment/road-to-readiness-school-performance-and-support-framework-resource-hub/spsf-prior-year-results" target="_blank" rel="noopener">2024-25</a>.
+    <b>Economically disadvantaged:</b> share of 2025-26 reading/math SOL test takers, from the <a href="https://schoolquality.virginia.gov/download-data" target="_blank" rel="noopener">School Quality Profiles</a> (not available for K-2 schools).
     <b>Locations:</b> <a href="https://nces.ed.gov/programs/edge/Geographic/SchoolLocations" target="_blank" rel="noopener">NCES EDGE</a> public school file, 2024-25.
     <b>Income:</b> ACS 2024 5-year, table B19013, census tracts.
   </p>
   <p class="note">
-    <b>Attendance zones are approximations</b>, not official boundaries: each division's territory is split among the schools serving each grade by nearest school (Voronoi), and zone income is the household-weighted average of the tract medians it overlaps. Real zones follow roads, rivers and policy, and magnet/virtual schools draw division-wide.
+    <b>Attendance zones</b> come from the best source available for each division and grade: boundaries the division publishes, then the federal <a href="https://nces.ed.gov/programs/edge/SABS" target="_blank" rel="noopener">School Attendance Boundary Survey</a> (2015-16) where its schools still match today's, and otherwise an approximation that splits the division among its schools by nearest school (Voronoi). Each popup says which. Zone income is the household-weighted average of the tract medians a zone overlaps. Magnet, choice and virtual schools draw division-wide.
   </p>
 </aside>
 
