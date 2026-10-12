@@ -9,7 +9,7 @@ poverty, and tracks the change from 2024-25.
 Needs Intensive Support 125 · Too Small 9. (VDOE lists 1,812; *Virginia Virtual Academy at Manassas*, rated
 Too Small, has no NCES location and is left off.)
 
-Live map: <https://ericallanwest.github.io/vdoe-school-performance/>
+Live map: <https://ericallanwest.github.io/virginia-school-performance/>
 
 ## Using the map
 
